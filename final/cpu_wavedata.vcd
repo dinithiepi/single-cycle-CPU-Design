@@ -1,0 +1,5589 @@
+$date
+	Wed Jul 16 10:52:15 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	100ps
+$end
+$scope module cpu_tb $end
+$var wire 32 ! PC [31:0] $end
+$var wire 1 " INSTR_BUSYWAIT $end
+$var wire 32 # INSTRUCTION [31:0] $end
+$var wire 1 $ IM_READ $end
+$var wire 128 % IM_INSTR [127:0] $end
+$var wire 1 & IM_BUSYWAIT $end
+$var wire 6 ' IM_ADDRESS [5:0] $end
+$var wire 32 ( DM_WRITEDATA [31:0] $end
+$var wire 1 ) DM_WRITE $end
+$var wire 32 * DM_READDATA [31:0] $end
+$var wire 1 + DM_READ $end
+$var wire 1 , DM_BUSYWAIT $end
+$var wire 6 - DM_ADDRESS [5:0] $end
+$var wire 8 . CPU_WRITEDATA [7:0] $end
+$var wire 1 / CPU_WRITE $end
+$var wire 8 0 CPU_READDATA [7:0] $end
+$var wire 1 1 CPU_READ $end
+$var wire 1 2 CPU_BUSYWAIT $end
+$var wire 8 3 CPU_ADDRESS [7:0] $end
+$var reg 1 4 CLK $end
+$var reg 1 5 RESET $end
+$var integer 32 6 i [31:0] $end
+$scope module my_datacache $end
+$var wire 1 4 clock $end
+$var wire 1 7 dirty $end
+$var wire 1 8 hit $end
+$var wire 1 5 reset $end
+$var wire 1 / write $end
+$var wire 3 9 tag [2:0] $end
+$var wire 1 1 read $end
+$var wire 2 : offset [1:0] $end
+$var wire 32 ; mem_readdata [31:0] $end
+$var wire 1 , mem_busywait $end
+$var wire 3 < index [2:0] $end
+$var wire 8 = cpu_writeData [7:0] $end
+$var wire 8 > address [7:0] $end
+$var parameter 3 ? IDLE $end
+$var parameter 3 @ MEM_READ $end
+$var parameter 3 A MEM_WRITE $end
+$var reg 1 2 busywait $end
+$var reg 1 B cache_write $end
+$var reg 8 C cpu_readData [7:0] $end
+$var reg 6 D mem_address [5:0] $end
+$var reg 1 + mem_read $end
+$var reg 1 ) mem_write $end
+$var reg 32 E mem_writedata [31:0] $end
+$var reg 3 F next_state [2:0] $end
+$var reg 8 G saved_address [7:0] $end
+$var reg 1 H saved_write $end
+$var reg 8 I saved_writeData [7:0] $end
+$var reg 3 J state [2:0] $end
+$var reg 1 K tagmatch $end
+$var integer 32 L i [31:0] $end
+$upscope $end
+$scope module my_datamem $end
+$var wire 6 M address [5:0] $end
+$var wire 1 4 clock $end
+$var wire 1 + read $end
+$var wire 1 5 reset $end
+$var wire 1 ) write $end
+$var wire 32 N writedata [31:0] $end
+$var reg 1 , busywait $end
+$var reg 1 O readaccess $end
+$var reg 32 P readdata [31:0] $end
+$var reg 1 Q writeaccess $end
+$var integer 32 R i [31:0] $end
+$upscope $end
+$scope module my_icache $end
+$var wire 10 S address [9:0] $end
+$var wire 1 4 clock $end
+$var wire 1 T hit $end
+$var wire 128 U instr_block [127:0] $end
+$var wire 1 5 reset $end
+$var wire 1 V valid $end
+$var wire 1 W tagMatch $end
+$var wire 3 X tag [2:0] $end
+$var wire 32 Y readinst [31:0] $end
+$var wire 2 Z offset [1:0] $end
+$var wire 128 [ mem_inst [127:0] $end
+$var wire 1 & mem_busywait $end
+$var wire 3 \ index [2:0] $end
+$var wire 3 ] cache_tag [2:0] $end
+$var parameter 3 ^ IDLE $end
+$var parameter 3 _ MEM_READ $end
+$var reg 1 " busywait $end
+$var reg 32 ` loaded_instr [31:0] $end
+$var reg 6 a mem_address [5:0] $end
+$var reg 1 $ mem_read $end
+$var reg 3 b next_state [2:0] $end
+$var reg 3 c state [2:0] $end
+$var integer 32 d i [31:0] $end
+$upscope $end
+$scope module my_imemory $end
+$var wire 6 e address [5:0] $end
+$var wire 1 4 clock $end
+$var wire 1 $ read $end
+$var reg 1 & busywait $end
+$var reg 1 f readaccess $end
+$var reg 128 g readinst [127:0] $end
+$upscope $end
+$scope module mycpu $end
+$var wire 8 h ADDRESS [7:0] $end
+$var wire 1 2 BUSYWAIT $end
+$var wire 1 4 CLK $end
+$var wire 32 i INSTRUCTION [31:0] $end
+$var wire 1 " INSTR_BUSYWAIT $end
+$var wire 8 j READDATA [7:0] $end
+$var wire 1 5 RESET $end
+$var wire 8 k WRITEDATA [7:0] $end
+$var wire 8 l registerOp [7:0] $end
+$var wire 32 m newPC [31:0] $end
+$var wire 8 n negatedOp [7:0] $end
+$var wire 1 o flowSelect $end
+$var wire 1 p ZERO $end
+$var wire 3 q WRITEREG [2:0] $end
+$var wire 32 r TARGET [31:0] $end
+$var wire 8 s REGOUT2 [7:0] $end
+$var wire 8 t REGOUT1 [7:0] $end
+$var wire 8 u REGIN [7:0] $end
+$var wire 3 v READREG2 [2:0] $end
+$var wire 3 w READREG1 [2:0] $end
+$var wire 32 x PCplus4 [31:0] $end
+$var wire 32 y PCout [31:0] $end
+$var wire 8 z OPERAND2 [7:0] $end
+$var wire 8 { OFFSET [7:0] $end
+$var wire 8 | IMMEDIATE [7:0] $end
+$var wire 8 } ALURESULT [7:0] $end
+$var reg 3 ~ ALUOP [2:0] $end
+$var reg 1 !" BRANCH $end
+$var reg 1 "" JUMP $end
+$var reg 8 #" OPCODE [7:0] $end
+$var reg 32 $" PC [31:0] $end
+$var reg 1 1 READ $end
+$var reg 1 / WRITE $end
+$var reg 1 %" WRITEENABLE $end
+$var reg 1 &" dataSelect $end
+$var reg 1 '" immSelect $end
+$var reg 1 (" signSelect $end
+$scope module busywaitMUX $end
+$var wire 32 )" IN2 [31:0] $end
+$var wire 1 *" SELECT $end
+$var wire 32 +" IN1 [31:0] $end
+$var reg 32 ," OUT [31:0] $end
+$upscope $end
+$scope module datamux $end
+$var wire 8 -" IN2 [7:0] $end
+$var wire 1 &" SELECT $end
+$var wire 8 ." IN1 [7:0] $end
+$var reg 8 /" OUT [7:0] $end
+$upscope $end
+$scope module flowctrlmux $end
+$var wire 1 o SELECT $end
+$var wire 32 0" IN2 [31:0] $end
+$var wire 32 1" IN1 [31:0] $end
+$var reg 32 2" OUT [31:0] $end
+$upscope $end
+$scope module immediateMUX $end
+$var wire 8 3" IN2 [7:0] $end
+$var wire 1 '" SELECT $end
+$var wire 8 4" IN1 [7:0] $end
+$var reg 8 5" OUT [7:0] $end
+$upscope $end
+$scope module my_alu $end
+$var wire 8 6" DATA2 [7:0] $end
+$var wire 3 7" SELECT [2:0] $end
+$var wire 1 p ZERO $end
+$var wire 8 8" orOut [7:0] $end
+$var wire 8 9" forwardOut [7:0] $end
+$var wire 8 :" andOut [7:0] $end
+$var wire 8 ;" addOut [7:0] $end
+$var wire 8 <" DATA1 [7:0] $end
+$var reg 8 =" RESULT [7:0] $end
+$scope module addUnit $end
+$var wire 8 >" DATA2 [7:0] $end
+$var wire 8 ?" RESULT [7:0] $end
+$var wire 8 @" DATA1 [7:0] $end
+$upscope $end
+$scope module andUnit $end
+$var wire 8 A" DATA2 [7:0] $end
+$var wire 8 B" RESULT [7:0] $end
+$var wire 8 C" DATA1 [7:0] $end
+$upscope $end
+$scope module forwardUnit $end
+$var wire 8 D" DATA [7:0] $end
+$var wire 8 E" RESULT [7:0] $end
+$upscope $end
+$scope module orUnit $end
+$var wire 8 F" DATA2 [7:0] $end
+$var wire 8 G" RESULT [7:0] $end
+$var wire 8 H" DATA1 [7:0] $end
+$upscope $end
+$upscope $end
+$scope module my_flowControl $end
+$var wire 1 !" BRANCH $end
+$var wire 1 "" JUMP $end
+$var wire 1 o OUT $end
+$var wire 1 p ZERO $end
+$upscope $end
+$scope module my_jumpbranchAdder $end
+$var wire 8 I" OFFSET [7:0] $end
+$var wire 22 J" signBits [21:0] $end
+$var wire 32 K" TARGET [31:0] $end
+$var wire 32 L" PC [31:0] $end
+$upscope $end
+$scope module my_pcAdder $end
+$var wire 32 M" PC [31:0] $end
+$var wire 32 N" PCplus4 [31:0] $end
+$upscope $end
+$scope module my_reg $end
+$var wire 1 4 CLK $end
+$var wire 8 O" IN [7:0] $end
+$var wire 3 P" INADDRESS [2:0] $end
+$var wire 8 Q" OUT1 [7:0] $end
+$var wire 3 R" OUT1ADDRESS [2:0] $end
+$var wire 8 S" OUT2 [7:0] $end
+$var wire 3 T" OUT2ADDRESS [2:0] $end
+$var wire 1 5 RESET $end
+$var wire 1 %" WRITE $end
+$var integer 32 U" i [31:0] $end
+$upscope $end
+$scope module my_twosComp $end
+$var wire 8 V" IN [7:0] $end
+$var wire 8 W" OUT [7:0] $end
+$upscope $end
+$scope module negationMUX $end
+$var wire 8 X" IN1 [7:0] $end
+$var wire 8 Y" IN2 [7:0] $end
+$var wire 1 (" SELECT $end
+$var reg 8 Z" OUT [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$upscope $end
+$scope module my_datamem $end
+$upscope $end
+$scope module my_icache $end
+$upscope $end
+$scope module my_imemory $end
+$upscope $end
+$scope module mycpu $end
+$scope module busywaitMUX $end
+$upscope $end
+$scope module datamux $end
+$upscope $end
+$scope module flowctrlmux $end
+$upscope $end
+$scope module immediateMUX $end
+$upscope $end
+$scope module my_alu $end
+$scope module addUnit $end
+$upscope $end
+$scope module andUnit $end
+$upscope $end
+$scope module forwardUnit $end
+$upscope $end
+$scope module orUnit $end
+$upscope $end
+$upscope $end
+$scope module my_flowControl $end
+$upscope $end
+$scope module my_jumpbranchAdder $end
+$upscope $end
+$scope module my_pcAdder $end
+$upscope $end
+$scope module my_reg $end
+$upscope $end
+$scope module my_twosComp $end
+$upscope $end
+$scope module negationMUX $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module mycpu $end
+$scope module my_reg $end
+$var reg 8 [" \REGISTER[0] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module mycpu $end
+$scope module my_reg $end
+$var reg 8 \" \REGISTER[1] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module mycpu $end
+$scope module my_reg $end
+$var reg 8 ]" \REGISTER[2] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module mycpu $end
+$scope module my_reg $end
+$var reg 8 ^" \REGISTER[3] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module mycpu $end
+$scope module my_reg $end
+$var reg 8 _" \REGISTER[4] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module mycpu $end
+$scope module my_reg $end
+$var reg 8 `" \REGISTER[5] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module mycpu $end
+$scope module my_reg $end
+$var reg 8 a" \REGISTER[6] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module mycpu $end
+$scope module my_reg $end
+$var reg 8 b" \REGISTER[7] [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$upscope $end
+$scope module my_datamem $end
+$upscope $end
+$scope module my_icache $end
+$upscope $end
+$scope module my_imemory $end
+$upscope $end
+$scope module mycpu $end
+$scope module busywaitMUX $end
+$upscope $end
+$scope module datamux $end
+$upscope $end
+$scope module flowctrlmux $end
+$upscope $end
+$scope module immediateMUX $end
+$upscope $end
+$scope module my_alu $end
+$scope module addUnit $end
+$upscope $end
+$scope module andUnit $end
+$upscope $end
+$scope module forwardUnit $end
+$upscope $end
+$scope module orUnit $end
+$upscope $end
+$upscope $end
+$scope module my_flowControl $end
+$upscope $end
+$scope module my_jumpbranchAdder $end
+$upscope $end
+$scope module my_pcAdder $end
+$upscope $end
+$scope module my_reg $end
+$upscope $end
+$scope module my_twosComp $end
+$upscope $end
+$scope module negationMUX $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datamem $end
+$var reg 8 c" \memory_array[0] [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datamem $end
+$var reg 8 d" \memory_array[1] [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datamem $end
+$var reg 8 e" \memory_array[2] [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datamem $end
+$var reg 8 f" \memory_array[3] [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datamem $end
+$var reg 8 g" \memory_array[4] [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datamem $end
+$var reg 8 h" \memory_array[5] [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datamem $end
+$var reg 8 i" \memory_array[6] [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datamem $end
+$var reg 8 j" \memory_array[7] [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datamem $end
+$var reg 8 k" \memory_array[8] [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datamem $end
+$var reg 8 l" \memory_array[9] [7:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$upscope $end
+$scope module my_datamem $end
+$upscope $end
+$scope module my_icache $end
+$upscope $end
+$scope module my_imemory $end
+$upscope $end
+$scope module mycpu $end
+$scope module busywaitMUX $end
+$upscope $end
+$scope module datamux $end
+$upscope $end
+$scope module flowctrlmux $end
+$upscope $end
+$scope module immediateMUX $end
+$upscope $end
+$scope module my_alu $end
+$scope module addUnit $end
+$upscope $end
+$scope module andUnit $end
+$upscope $end
+$scope module forwardUnit $end
+$upscope $end
+$scope module orUnit $end
+$upscope $end
+$upscope $end
+$scope module my_flowControl $end
+$upscope $end
+$scope module my_jumpbranchAdder $end
+$upscope $end
+$scope module my_pcAdder $end
+$upscope $end
+$scope module my_reg $end
+$upscope $end
+$scope module my_twosComp $end
+$upscope $end
+$scope module negationMUX $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$var reg 32 m" \cacheblock_array[0] [31:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$var reg 32 n" \cacheblock_array[1] [31:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$var reg 32 o" \cacheblock_array[2] [31:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$var reg 32 p" \cacheblock_array[3] [31:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$var reg 32 q" \cacheblock_array[4] [31:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$var reg 32 r" \cacheblock_array[5] [31:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$var reg 32 s" \cacheblock_array[6] [31:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$var reg 32 t" \cacheblock_array[7] [31:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$upscope $end
+$scope module my_datamem $end
+$upscope $end
+$scope module my_icache $end
+$upscope $end
+$scope module my_imemory $end
+$upscope $end
+$scope module mycpu $end
+$scope module busywaitMUX $end
+$upscope $end
+$scope module datamux $end
+$upscope $end
+$scope module flowctrlmux $end
+$upscope $end
+$scope module immediateMUX $end
+$upscope $end
+$scope module my_alu $end
+$scope module addUnit $end
+$upscope $end
+$scope module andUnit $end
+$upscope $end
+$scope module forwardUnit $end
+$upscope $end
+$scope module orUnit $end
+$upscope $end
+$upscope $end
+$scope module my_flowControl $end
+$upscope $end
+$scope module my_jumpbranchAdder $end
+$upscope $end
+$scope module my_pcAdder $end
+$upscope $end
+$scope module my_reg $end
+$upscope $end
+$scope module my_twosComp $end
+$upscope $end
+$scope module negationMUX $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_icache $end
+$var reg 128 u" \instr_block_array[0] [127:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_icache $end
+$var reg 128 v" \instr_block_array[1] [127:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_icache $end
+$var reg 128 w" \instr_block_array[2] [127:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_icache $end
+$var reg 128 x" \instr_block_array[3] [127:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_icache $end
+$var reg 128 y" \instr_block_array[4] [127:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_icache $end
+$var reg 128 z" \instr_block_array[5] [127:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_icache $end
+$var reg 128 {" \instr_block_array[6] [127:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_icache $end
+$var reg 128 |" \instr_block_array[7] [127:0] $end
+$upscope $end
+$upscope $end
+$scope module cpu_tb $end
+$scope module my_datacache $end
+$upscope $end
+$scope module my_datamem $end
+$upscope $end
+$scope module my_icache $end
+$upscope $end
+$scope module my_imemory $end
+$upscope $end
+$scope module mycpu $end
+$scope module busywaitMUX $end
+$upscope $end
+$scope module datamux $end
+$upscope $end
+$scope module flowctrlmux $end
+$upscope $end
+$scope module immediateMUX $end
+$upscope $end
+$scope module my_alu $end
+$scope module addUnit $end
+$upscope $end
+$scope module andUnit $end
+$upscope $end
+$scope module forwardUnit $end
+$upscope $end
+$scope module orUnit $end
+$upscope $end
+$upscope $end
+$scope module my_flowControl $end
+$upscope $end
+$scope module my_jumpbranchAdder $end
+$upscope $end
+$scope module my_pcAdder $end
+$upscope $end
+$scope module my_reg $end
+$upscope $end
+$scope module my_twosComp $end
+$upscope $end
+$scope module negationMUX $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1 _
+b0 ^
+b10 A
+b1 @
+b0 ?
+$end
+#0
+$dumpvars
+bx |"
+bx {"
+bx z"
+bx y"
+bx x"
+bx w"
+bx v"
+bx u"
+bx t"
+bx s"
+bx r"
+bx q"
+bx p"
+bx o"
+bx n"
+bx m"
+b0 l"
+b0 k"
+b0 j"
+b0 i"
+b0 h"
+b0 g"
+b0 f"
+b0 e"
+b0 d"
+b0 c"
+bx b"
+bx a"
+bx `"
+bx _"
+bx ^"
+bx ]"
+bx \"
+bx ["
+bx Z"
+bx Y"
+bx X"
+bx W"
+bx V"
+bx U"
+bx T"
+bx S"
+bx R"
+bx Q"
+bx P"
+bx O"
+bx N"
+bx M"
+bx L"
+bx K"
+bx J"
+bx I"
+bx H"
+bx G"
+bx F"
+bx E"
+bx D"
+bx C"
+bx B"
+bx A"
+bx @"
+bx ?"
+bx >"
+bx ="
+bx <"
+bx ;"
+bx :"
+bx 9"
+bx 8"
+bx 7"
+bx 6"
+bx 5"
+bx 4"
+bx 3"
+bx 2"
+bx 1"
+bx 0"
+bx /"
+bx ."
+bx -"
+bx ,"
+bx +"
+x*"
+bx )"
+x("
+x'"
+x&"
+x%"
+bx $"
+bx #"
+x""
+x!"
+bx ~
+bx }
+bx |
+bx {
+bx z
+bx y
+bx x
+bx w
+bx v
+bx u
+bx t
+bx s
+bx r
+bx q
+xp
+xo
+bx n
+bx m
+bx l
+bx k
+bx j
+bx i
+bx h
+bx g
+0f
+bx e
+b1000 d
+b0 c
+b0 b
+bx a
+bx `
+bx ]
+bx \
+bx [
+bx Z
+bx Y
+bx X
+xW
+xV
+bx U
+xT
+bx S
+b100000000 R
+0Q
+bx P
+0O
+bx N
+bx M
+b1000 L
+xK
+b0 J
+bx I
+xH
+bx G
+b0 F
+bx E
+bx D
+bx C
+0B
+bx >
+bx =
+bx <
+bx ;
+bx :
+bx 9
+x8
+x7
+b1000 6
+15
+04
+bx 3
+02
+01
+bx 0
+0/
+bx .
+bx -
+0,
+0+
+bx *
+0)
+bx (
+bx '
+0&
+bx %
+0$
+bx #
+x"
+bx !
+$end
+#10
+b0x ]
+#40
+b1000 L
+b1000 d
+14
+#50
+b0 m
+b0 ,"
+1*"
+b0 Z
+b0 \
+b0 X
+1"
+b0 S
+b0 b"
+b0 a"
+b0 `"
+b0 _"
+b0 ^"
+b0 ]"
+b0 \"
+b0 ["
+b1000 U"
+b0 !
+b0 $"
+b0 )"
+b0 M"
+05
+#60
+b1 b
+0T
+b100 y
+b100 +"
+b100 2"
+0V
+b100 x
+b100 1"
+b100 L"
+b100 N"
+#80
+04
+#120
+1f
+1&
+b0 '
+b0 a
+b0 e
+1$
+b1 b
+b1 c
+14
+#160
+04
+#200
+14
+#240
+04
+#280
+14
+#320
+04
+#360
+14
+#400
+04
+#440
+14
+#480
+04
+#520
+14
+#560
+04
+#600
+14
+bx00011011 %
+bx00011011 [
+bx00011011 g
+#640
+04
+#680
+14
+#720
+04
+#760
+14
+#800
+04
+#840
+14
+#880
+04
+#920
+14
+#960
+04
+#1000
+14
+bx0000000000011011 %
+bx0000000000011011 [
+bx0000000000011011 g
+#1040
+04
+#1080
+14
+#1120
+04
+#1160
+14
+#1200
+04
+#1240
+14
+#1280
+04
+#1320
+14
+#1360
+04
+#1400
+14
+bx000001000000000000011011 %
+bx000001000000000000011011 [
+bx000001000000000000011011 g
+#1440
+04
+#1480
+14
+#1520
+04
+#1560
+14
+#1600
+04
+#1640
+14
+#1680
+04
+#1720
+14
+#1760
+04
+#1800
+14
+bx00000000000001000000000000011011 %
+bx00000000000001000000000000011011 [
+bx00000000000001000000000000011011 g
+#1840
+04
+#1880
+14
+#1920
+04
+#1960
+14
+#2000
+04
+#2040
+14
+#2080
+04
+#2120
+14
+#2160
+04
+#2200
+14
+bx0010001000000000000001000000000000011011 %
+bx0010001000000000000001000000000000011011 [
+bx0010001000000000000001000000000000011011 g
+#2240
+04
+#2280
+14
+#2320
+04
+#2360
+14
+#2400
+04
+#2440
+14
+#2480
+04
+#2520
+14
+#2560
+04
+#2600
+14
+bx000000000010001000000000000001000000000000011011 %
+bx000000000010001000000000000001000000000000011011 [
+bx000000000010001000000000000001000000000000011011 g
+#2640
+04
+#2680
+14
+#2720
+04
+#2760
+14
+#2800
+04
+#2840
+14
+#2880
+04
+#2920
+14
+#2960
+04
+#3000
+14
+bx00000101000000000010001000000000000001000000000000011011 %
+bx00000101000000000010001000000000000001000000000000011011 [
+bx00000101000000000010001000000000000001000000000000011011 g
+#3040
+04
+#3080
+14
+#3120
+04
+#3160
+14
+#3200
+04
+#3240
+14
+#3280
+04
+#3320
+14
+#3360
+04
+#3400
+14
+bx0000000000000101000000000010001000000000000001000000000000011011 %
+bx0000000000000101000000000010001000000000000001000000000000011011 [
+bx0000000000000101000000000010001000000000000001000000000000011011 g
+#3440
+04
+#3480
+14
+#3520
+04
+#3560
+14
+#3600
+04
+#3640
+14
+#3680
+04
+#3720
+14
+#3760
+04
+#3800
+14
+bx000001010000000000000101000000000010001000000000000001000000000000011011 %
+bx000001010000000000000101000000000010001000000000000001000000000000011011 [
+bx000001010000000000000101000000000010001000000000000001000000000000011011 g
+#3840
+04
+#3880
+14
+#3920
+04
+#3960
+14
+#4000
+04
+#4040
+14
+#4080
+04
+#4120
+14
+#4160
+04
+#4200
+14
+bx00000100000001010000000000000101000000000010001000000000000001000000000000011011 %
+bx00000100000001010000000000000101000000000010001000000000000001000000000000011011 [
+bx00000100000001010000000000000101000000000010001000000000000001000000000000011011 g
+#4240
+04
+#4280
+14
+#4320
+04
+#4360
+14
+#4400
+04
+#4440
+14
+#4480
+04
+#4520
+14
+#4560
+04
+#4600
+14
+bx0000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 %
+bx0000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 [
+bx0000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 g
+#4640
+04
+#4680
+14
+#4720
+04
+#4760
+14
+#4800
+04
+#4840
+14
+#4880
+04
+#4920
+14
+#4960
+04
+#5000
+14
+bx000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 %
+bx000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 [
+bx000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 g
+#5040
+04
+#5080
+14
+#5120
+04
+#5160
+14
+#5200
+04
+#5240
+14
+#5280
+04
+#5320
+14
+#5360
+04
+#5400
+14
+bx01011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 %
+bx01011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 [
+bx01011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 g
+#5440
+04
+#5480
+14
+#5520
+04
+#5560
+14
+#5600
+04
+#5640
+14
+#5680
+04
+#5720
+14
+#5760
+04
+#5800
+14
+bx0000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 %
+bx0000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 [
+bx0000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 g
+#5840
+04
+#5880
+14
+#5920
+04
+#5960
+14
+#6000
+04
+#6040
+14
+#6080
+04
+#6120
+14
+#6160
+04
+#6200
+14
+bx000000010000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 %
+bx000000010000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 [
+bx000000010000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 g
+#6240
+04
+#6280
+14
+#6320
+04
+#6360
+14
+#6400
+04
+#6440
+14
+#6480
+04
+#6520
+14
+#6560
+04
+#6600
+b0 c
+b1 b
+14
+0f
+0&
+b10000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 %
+b10000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 [
+b10000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 g
+#6610
+b10000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 u"
+bx '
+bx a
+bx e
+0$
+#6620
+b0 b
+xT
+b0 ]
+1V
+b10000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000011011 U
+#6629
+1T
+1W
+#6630
+b0 w
+b0 R"
+b11 v
+b11 T"
+b100 q
+b100 P"
+b0 J"
+b11011 |
+b11011 3"
+b100 {
+b100 I"
+b1000000000000011011 #
+b1000000000000011011 Y
+b1000000000000011011 i
+b1000000000000011011 `
+#6640
+b100 m
+b100 ,"
+0o
+0*"
+b11011 z
+b11011 5"
+b11011 6"
+b11011 >"
+b11011 A"
+b11011 D"
+b11011 F"
+0"
+0&"
+1%"
+0!"
+0""
+0("
+1'"
+b0 ~
+b0 7"
+b0 #"
+04
+#6650
+0p
+b11011 u
+b11011 /"
+b11011 O"
+b11011 3
+b11011 >
+b11011 h
+b11011 }
+b11011 ."
+b11011 ="
+b0 l
+b0 4"
+b0 Z"
+b0xx0xx :"
+b0xx0xx B"
+bx11x11 8"
+bx11x11 G"
+b11011 9"
+b11011 E"
+b0 .
+b0 =
+b0 k
+b0 t
+b0 <"
+b0 @"
+b0 C"
+b0 H"
+b0 Q"
+b0 s
+b0 S"
+b0 V"
+b0 X"
+b10100 r
+b10100 0"
+b10100 K"
+#6660
+08
+b11 :
+b110 <
+b0 9
+b11011 8"
+b11011 G"
+b0 :"
+b0 B"
+b0 n
+b0 W"
+b0 Y"
+#6670
+07
+b11011 ;"
+b11011 ?"
+#6680
+14
+#6690
+1*"
+b1 Z
+1"
+b100 S
+b11011 _"
+b100 !
+b100 $"
+b100 )"
+b100 M"
+#6700
+b100010 z
+b100010 5"
+b100010 6"
+b100010 >"
+b100010 A"
+b100010 D"
+b100010 F"
+b10 v
+b10 T"
+b101 q
+b101 P"
+b100010 |
+b100010 3"
+b101 {
+b101 I"
+b1010000000000100010 #
+b1010000000000100010 Y
+b1010000000000100010 i
+b1000 y
+b1000 +"
+b1000 2"
+b1010000000000100010 `
+b1000 x
+b1000 1"
+b1000 L"
+b1000 N"
+#6710
+b100010 u
+b100010 /"
+b100010 O"
+b100010 3
+b100010 >
+b100010 h
+b100010 }
+b100010 ."
+b100010 ="
+b100010 8"
+b100010 G"
+b100010 9"
+b100010 E"
+#6720
+b1000 m
+b1000 ,"
+0*"
+0"
+b10 :
+b0 <
+b1 9
+b100010 ;"
+b100010 ?"
+b11100 r
+b11100 0"
+b11100 K"
+04
+#6760
+14
+#6770
+1*"
+b10 Z
+1"
+b1000 S
+b1000 !
+b1000 $"
+b1000 )"
+b1000 M"
+b100010 `"
+#6780
+b100 w
+b100 R"
+b101 z
+b101 5"
+b101 6"
+b101 >"
+b101 A"
+b101 D"
+b101 F"
+b101 v
+b101 T"
+b110 q
+b110 P"
+b101 |
+b101 3"
+b110 {
+b110 I"
+b10000001100000010000000101 #
+b10000001100000010000000101 Y
+b10000001100000010000000101 i
+b1100 y
+b1100 +"
+b1100 2"
+b10000001100000010000000101 `
+b1100 x
+b1100 1"
+b1100 L"
+b1100 N"
+#6790
+b0 z
+b0 5"
+b0 6"
+b0 >"
+b0 A"
+b0 D"
+b0 F"
+b101 8"
+b101 G"
+b101 9"
+b101 E"
+0'"
+b1 ~
+b1 7"
+b10 #"
+#6800
+b1100 m
+b1100 ,"
+b100010 z
+b100010 5"
+b100010 6"
+b100010 >"
+b100010 A"
+b100010 D"
+b100010 F"
+0*"
+b100010 l
+b100010 4"
+b100010 Z"
+0"
+b0 8"
+b0 G"
+b0 9"
+b0 E"
+b11011 .
+b11011 =
+b11011 k
+b11011 t
+b11011 <"
+b11011 @"
+b11011 C"
+b11011 H"
+b11011 Q"
+b100010 s
+b100010 S"
+b100010 V"
+b100010 X"
+b100100 r
+b100100 0"
+b100100 K"
+04
+#6810
+b10 :"
+b10 B"
+b100010 9"
+b100010 E"
+b111011 8"
+b111011 G"
+b11011110 n
+b11011110 W"
+b11011110 Y"
+#6820
+b111101 u
+b111101 /"
+b111101 O"
+b111101 3
+b111101 >
+b111101 h
+b111101 }
+b111101 ."
+b111101 ="
+b111101 ;"
+b111101 ?"
+#6830
+b1 :
+b111 <
+#6840
+14
+#6850
+1*"
+b11 Z
+1"
+b1100 S
+b111101 a"
+b1100 !
+b1100 $"
+b1100 )"
+b1100 M"
+#6860
+b0 w
+b0 R"
+b10 v
+b10 T"
+b1 q
+b1 P"
+b1011010 |
+b1011010 3"
+b1 {
+b1 I"
+b10000000001011010 #
+b10000000001011010 Y
+b10000000001011010 i
+b10000 y
+b10000 +"
+b10000 2"
+b10000000001011010 `
+b10000 x
+b10000 1"
+b10000 L"
+b10000 N"
+#6870
+b100010 u
+b100010 /"
+b100010 O"
+b1011010 z
+b1011010 5"
+b1011010 6"
+b1011010 >"
+b1011010 A"
+b1011010 D"
+b1011010 F"
+b100010 3
+b100010 >
+b100010 h
+b100010 }
+b100010 ."
+b100010 ="
+1'"
+b0 ~
+b0 7"
+b0 #"
+#6880
+b10000 m
+b10000 ,"
+b1011010 u
+b1011010 /"
+b1011010 O"
+0*"
+b1011010 3
+b1011010 >
+b1011010 h
+b1011010 }
+b1011010 ."
+b1011010 ="
+b0 l
+b0 4"
+b0 Z"
+0"
+b11010 :"
+b11010 B"
+b1011011 8"
+b1011011 G"
+b10 :
+b0 <
+b1011010 9"
+b1011010 E"
+b0 .
+b0 =
+b0 k
+b0 t
+b0 <"
+b0 @"
+b0 C"
+b0 H"
+b0 Q"
+b0 s
+b0 S"
+b0 V"
+b0 X"
+b10100 r
+b10100 0"
+b10100 K"
+04
+#6890
+b110 <
+b10 9
+b1011010 8"
+b1011010 G"
+b0 :"
+b0 B"
+b0 n
+b0 W"
+b0 Y"
+#6900
+b1011010 ;"
+b1011010 ?"
+#6920
+14
+#6930
+1*"
+b0 Z
+b1 \
+1"
+b10000 S
+b10000 !
+b10000 $"
+b10000 )"
+b10000 M"
+b1011010 \"
+#6940
+bx w
+bx R"
+bx z
+bx 5"
+bx 6"
+bx >"
+bx A"
+bx D"
+bx F"
+bx v
+bx T"
+bx q
+bx P"
+bx J"
+bx |
+bx 3"
+bx {
+bx I"
+b1 b
+bx #
+bx Y
+bx i
+0T
+b10100 y
+b10100 +"
+b10100 2"
+b1000000000000011011 `
+bx U
+b0x ]
+0V
+b10100 x
+b10100 1"
+b10100 L"
+b10100 N"
+#6949
+xW
+#6950
+xp
+bx u
+bx /"
+bx O"
+bx 3
+bx >
+bx h
+bx }
+bx ."
+bx ="
+bx 8"
+bx G"
+bx 9"
+bx E"
+bx #"
+#6960
+x8
+bx l
+bx 4"
+bx Z"
+bx :
+bx <
+bx 9
+bx .
+bx =
+bx k
+bx t
+bx <"
+bx @"
+bx C"
+bx H"
+bx Q"
+bx ;"
+bx ?"
+bx s
+bx S"
+bx V"
+bx X"
+bx r
+bx 0"
+bx K"
+04
+#6970
+bx :"
+bx B"
+bx n
+bx W"
+bx Y"
+x7
+#7000
+1f
+1&
+b1 '
+b1 a
+b1 e
+1$
+b1 b
+b1 c
+14
+#7040
+04
+#7080
+14
+#7120
+04
+#7160
+14
+#7200
+04
+#7240
+14
+#7280
+04
+#7320
+14
+#7360
+04
+#7400
+14
+#7440
+04
+#7480
+14
+b10000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000000011 %
+b10000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000000011 [
+b10000000001011010000000100000011000000100000001010000000000000101000000000010001000000000000001000000000000000011 g
+#7520
+04
+#7560
+14
+#7600
+04
+#7640
+14
+#7680
+04
+#7720
+14
+#7760
+04
+#7800
+14
+#7840
+04
+#7880
+14
+#7920
+04
+#7960
+14
+#8000
+04
+#8040
+14
+#8080
+04
+#8120
+14
+#8160
+04
+#8200
+14
+#8240
+04
+#8280
+14
+#8320
+04
+#8360
+14
+#8400
+04
+#8440
+14
+#8480
+04
+#8520
+14
+#8560
+04
+#8600
+14
+#8640
+04
+#8680
+14
+#8720
+04
+#8760
+14
+#8800
+04
+#8840
+14
+#8880
+04
+#8920
+14
+#8960
+04
+#9000
+14
+#9040
+04
+#9080
+14
+b10000000001011010000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 %
+b10000000001011010000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 [
+b10000000001011010000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 g
+#9120
+04
+#9160
+14
+#9200
+04
+#9240
+14
+#9280
+04
+#9320
+14
+#9360
+04
+#9400
+14
+#9440
+04
+#9480
+14
+#9520
+04
+#9560
+14
+#9600
+04
+#9640
+14
+#9680
+04
+#9720
+14
+#9760
+04
+#9800
+14
+#9840
+04
+#9880
+14
+#9920
+04
+#9960
+14
+#10000
+04
+#10040
+14
+#10080
+04
+#10120
+14
+#10160
+04
+#10200
+14
+#10240
+04
+#10280
+14
+#10320
+04
+#10360
+14
+#10400
+04
+#10440
+14
+#10480
+04
+#10520
+14
+#10560
+04
+#10600
+14
+#10640
+04
+#10680
+14
+#10720
+04
+#10760
+14
+#10800
+04
+#10840
+14
+#10880
+04
+#10920
+14
+#10960
+04
+#11000
+14
+#11040
+04
+#11080
+14
+#11120
+04
+#11160
+14
+#11200
+04
+#11240
+14
+#11280
+04
+#11320
+14
+#11360
+04
+#11400
+14
+#11440
+04
+#11480
+14
+#11520
+04
+#11560
+14
+#11600
+04
+#11640
+14
+#11680
+04
+#11720
+14
+#11760
+04
+#11800
+14
+#11840
+04
+#11880
+14
+#11920
+04
+#11960
+14
+#12000
+04
+#12040
+14
+#12080
+04
+#12120
+14
+#12160
+04
+#12200
+14
+#12240
+04
+#12280
+14
+b10000000000000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 %
+b10000000000000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 [
+b10000000000000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 g
+#12320
+04
+#12360
+14
+#12400
+04
+#12440
+14
+#12480
+04
+#12520
+14
+#12560
+04
+#12600
+14
+#12640
+04
+#12680
+14
+b10000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 %
+b10000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 [
+b10000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 g
+#12720
+04
+#12760
+14
+#12800
+04
+#12840
+14
+#12880
+04
+#12920
+14
+#12960
+04
+#13000
+14
+#13040
+04
+#13080
+14
+#13120
+04
+#13160
+14
+#13200
+04
+#13240
+14
+#13280
+04
+#13320
+14
+#13360
+04
+#13400
+14
+#13440
+04
+#13480
+b0 c
+b1 b
+14
+0f
+0&
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 %
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 [
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 g
+#13490
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 v"
+bx '
+bx a
+bx e
+0$
+#13500
+b0 b
+xT
+b0 ]
+1V
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000000011 U
+#13509
+b0 w
+b0 R"
+b11011 z
+b11011 5"
+b11011 6"
+b11011 >"
+b11011 A"
+b11011 D"
+b11011 F"
+b11 v
+b11 T"
+b100 q
+b100 P"
+b0 J"
+b11011 |
+b11011 3"
+b100 {
+b100 I"
+b1000000000000011011 #
+b1000000000000011011 Y
+b1000000000000011011 i
+1T
+1W
+#13510
+b11 z
+b11 5"
+b11 6"
+b11 >"
+b11 A"
+b11 D"
+b11 F"
+b11 |
+b11 3"
+b1000000000000000011 #
+b1000000000000000011 Y
+b1000000000000000011 i
+b1000000000000000011 `
+#13519
+b0 #"
+#13520
+0p
+b10100 m
+b10100 ,"
+b11 u
+b11 /"
+b11 O"
+0*"
+b11 3
+b11 >
+b11 h
+b11 }
+b11 ."
+b11 ="
+0"
+b0xx :"
+b0xx B"
+bx11 8"
+bx11 G"
+b11 9"
+b11 E"
+04
+#13529
+b0 l
+b0 4"
+b0 Z"
+b0 .
+b0 =
+b0 k
+b0 t
+b0 <"
+b0 @"
+b0 C"
+b0 H"
+b0 Q"
+b0 s
+b0 S"
+b0 V"
+b0 X"
+b100100 r
+b100100 0"
+b100100 K"
+#13530
+08
+b11 :
+b0 <
+b0 9
+#13539
+b11 8"
+b11 G"
+b0 :"
+b0 B"
+b0 n
+b0 W"
+b0 Y"
+#13540
+07
+#13549
+b11 ;"
+b11 ?"
+#13560
+14
+#13570
+1*"
+b1 Z
+1"
+b10100 S
+b11 _"
+b10100 !
+b10100 $"
+b10100 )"
+b10100 M"
+#13580
+b10 z
+b10 5"
+b10 6"
+b10 >"
+b10 A"
+b10 D"
+b10 F"
+b10 v
+b10 T"
+b101 q
+b101 P"
+b10 |
+b10 3"
+b101 {
+b101 I"
+b1010000000000000010 #
+b1010000000000000010 Y
+b1010000000000000010 i
+b11000 y
+b11000 +"
+b11000 2"
+b1010000000000000010 `
+b11000 x
+b11000 1"
+b11000 L"
+b11000 N"
+#13590
+b10 u
+b10 /"
+b10 O"
+b10 3
+b10 >
+b10 h
+b10 }
+b10 ."
+b10 ="
+b10 8"
+b10 G"
+b10 9"
+b10 E"
+#13600
+b11000 m
+b11000 ,"
+0*"
+0"
+b10 :
+b10 ;"
+b10 ?"
+b101100 r
+b101100 0"
+b101100 K"
+04
+#13640
+14
+#13650
+1*"
+b10 Z
+1"
+b11000 S
+b11000 !
+b11000 $"
+b11000 )"
+b11000 M"
+b10 `"
+#13660
+b100 w
+b100 R"
+b101 z
+b101 5"
+b101 6"
+b101 >"
+b101 A"
+b101 D"
+b101 F"
+b101 v
+b101 T"
+b110 q
+b110 P"
+b101 |
+b101 3"
+b110 {
+b110 I"
+b10000001100000010000000101 #
+b10000001100000010000000101 Y
+b10000001100000010000000101 i
+b11100 y
+b11100 +"
+b11100 2"
+b10000001100000010000000101 `
+b11100 x
+b11100 1"
+b11100 L"
+b11100 N"
+#13670
+b0 z
+b0 5"
+b0 6"
+b0 >"
+b0 A"
+b0 D"
+b0 F"
+b101 8"
+b101 G"
+b101 9"
+b101 E"
+0'"
+b1 ~
+b1 7"
+b10 #"
+#13680
+b11100 m
+b11100 ,"
+b10 z
+b10 5"
+b10 6"
+b10 >"
+b10 A"
+b10 D"
+b10 F"
+0*"
+b10 l
+b10 4"
+b10 Z"
+0"
+b0 8"
+b0 G"
+b0 9"
+b0 E"
+b11 .
+b11 =
+b11 k
+b11 t
+b11 <"
+b11 @"
+b11 C"
+b11 H"
+b11 Q"
+b10 s
+b10 S"
+b10 V"
+b10 X"
+b110100 r
+b110100 0"
+b110100 K"
+04
+#13690
+b10 :"
+b10 B"
+b10 9"
+b10 E"
+b11 8"
+b11 G"
+b11111110 n
+b11111110 W"
+b11111110 Y"
+#13700
+b101 u
+b101 /"
+b101 O"
+b101 3
+b101 >
+b101 h
+b101 }
+b101 ."
+b101 ="
+b101 ;"
+b101 ?"
+#13710
+b1 :
+b1 <
+#13720
+14
+#13730
+1*"
+b11 Z
+1"
+b11100 S
+b101 a"
+b11100 !
+b11100 $"
+b11100 )"
+b11100 M"
+#13740
+b1 w
+b1 R"
+b100 v
+b100 T"
+b1 q
+b1 P"
+b100 |
+b100 3"
+b1 {
+b1 I"
+b11000000010000000100000100 #
+b11000000010000000100000100 Y
+b11000000010000000100000100 i
+b100000 y
+b100000 +"
+b100000 2"
+b11000000010000000100000100 `
+b100000 x
+b100000 1"
+b100000 L"
+b100000 N"
+#13750
+b11111110 z
+b11111110 5"
+b11111110 6"
+b11111110 >"
+b11111110 A"
+b11111110 D"
+b11111110 F"
+b11111110 l
+b11111110 4"
+b11111110 Z"
+1("
+b11 #"
+#13760
+b100000 m
+b100000 ,"
+0*"
+0"
+b11111111 8"
+b11111111 G"
+b11111110 9"
+b11111110 E"
+b1011010 .
+b1011010 =
+b1011010 k
+b1011010 t
+b1011010 <"
+b1011010 @"
+b1011010 C"
+b1011010 H"
+b1011010 Q"
+b11 s
+b11 S"
+b11 V"
+b11 X"
+b100100 r
+b100100 0"
+b100100 K"
+04
+#13770
+b11111101 z
+b11111101 5"
+b11111101 6"
+b11111101 >"
+b11111101 A"
+b11111101 D"
+b11111101 F"
+b11111101 l
+b11111101 4"
+b11111101 Z"
+b11111110 8"
+b11111110 G"
+b1011010 :"
+b1011010 B"
+b11111101 n
+b11111101 W"
+b11111101 Y"
+#13780
+b1011000 :"
+b1011000 B"
+b11111111 8"
+b11111111 G"
+b11111101 9"
+b11111101 E"
+#13790
+b1010111 u
+b1010111 /"
+b1010111 O"
+b1010111 3
+b1010111 >
+b1010111 h
+b1010111 }
+b1010111 ."
+b1010111 ="
+b1010111 ;"
+b1010111 ?"
+#13800
+b11 :
+b101 <
+b10 9
+14
+#13810
+1*"
+b0 Z
+b10 \
+1"
+b100000 S
+b100000 !
+b100000 $"
+b100000 )"
+b100000 M"
+b1010111 \"
+#13820
+bx w
+bx R"
+bx v
+bx T"
+bx q
+bx P"
+bx J"
+bx |
+bx 3"
+bx {
+bx I"
+b1 b
+bx #
+bx Y
+bx i
+0T
+b100100 y
+b100100 +"
+b100100 2"
+b1000000000000000011 `
+bx U
+b0x ]
+0V
+b100100 x
+b100100 1"
+b100100 L"
+b100100 N"
+#13829
+xW
+#13830
+bx #"
+#13840
+bx .
+bx =
+bx k
+bx t
+bx <"
+bx @"
+bx C"
+bx H"
+bx Q"
+bx s
+bx S"
+bx V"
+bx X"
+bx r
+bx 0"
+bx K"
+04
+#13850
+bx z
+bx 5"
+bx 6"
+bx >"
+bx A"
+bx D"
+bx F"
+bx l
+bx 4"
+bx Z"
+b111111x1 8"
+b111111x1 G"
+bx0x :"
+bx0x B"
+bx n
+bx W"
+bx Y"
+#13860
+xp
+bx u
+bx /"
+bx O"
+bx 3
+bx >
+bx h
+bx }
+bx ."
+bx ="
+bx :"
+bx B"
+bx 8"
+bx G"
+bx 9"
+bx E"
+bx ;"
+bx ?"
+#13870
+x8
+bx :
+bx <
+bx 9
+#13880
+1f
+1&
+b10 '
+b10 a
+b10 e
+1$
+b1 b
+b1 c
+x7
+14
+#13920
+04
+#13960
+14
+#14000
+04
+#14040
+14
+#14080
+04
+#14120
+14
+#14160
+04
+#14200
+14
+#14240
+04
+#14280
+14
+#14320
+04
+#14360
+14
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000001000 %
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000001000 [
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000000001000 g
+#14400
+04
+#14440
+14
+#14480
+04
+#14520
+14
+#14560
+04
+#14600
+14
+#14640
+04
+#14680
+14
+#14720
+04
+#14760
+14
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000100001000 %
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000100001000 [
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000001000000000100001000 g
+#14800
+04
+#14840
+14
+#14880
+04
+#14920
+14
+#14960
+04
+#15000
+14
+#15040
+04
+#15080
+14
+#15120
+04
+#15160
+14
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000000000000000100001000 %
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000000000000000100001000 [
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000000000000000000000000100001000 g
+#15200
+04
+#15240
+14
+#15280
+04
+#15320
+14
+#15360
+04
+#15400
+14
+#15440
+04
+#15480
+14
+#15520
+04
+#15560
+14
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000001011000000000000000100001000 %
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000001011000000000000000100001000 [
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000001000001011000000000000000100001000 g
+#15600
+04
+#15640
+14
+#15680
+04
+#15720
+14
+#15760
+04
+#15800
+14
+#15840
+04
+#15880
+14
+#15920
+04
+#15960
+14
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000100000001011000000000000000100001000 %
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000100000001011000000000000000100001000 [
+b11000000010000000100000100000000100000011000000100000001010000000000000101000000000000100000001011000000000000000100001000 g
+#16000
+04
+#16040
+14
+#16080
+04
+#16120
+14
+#16160
+04
+#16200
+14
+#16240
+04
+#16280
+14
+#16320
+04
+#16360
+14
+#16400
+04
+#16440
+14
+#16480
+04
+#16520
+14
+#16560
+04
+#16600
+14
+#16640
+04
+#16680
+14
+#16720
+04
+#16760
+14
+b11000000010000000100000100000000100000011000000100000001010000000000000010000000000000100000001011000000000000000100001000 %
+b11000000010000000100000100000000100000011000000100000001010000000000000010000000000000100000001011000000000000000100001000 [
+b11000000010000000100000100000000100000011000000100000001010000000000000010000000000000100000001011000000000000000100001000 g
+#16800
+04
+#16840
+14
+#16880
+04
+#16920
+14
+#16960
+04
+#17000
+14
+#17040
+04
+#17080
+14
+#17120
+04
+#17160
+14
+b11000000010000000100000100000000100000011000000100000001010000100100000010000000000000100000001011000000000000000100001000 %
+b11000000010000000100000100000000100000011000000100000001010000100100000010000000000000100000001011000000000000000100001000 [
+b11000000010000000100000100000000100000011000000100000001010000100100000010000000000000100000001011000000000000000100001000 g
+#17200
+04
+#17240
+14
+#17280
+04
+#17320
+14
+#17360
+04
+#17400
+14
+#17440
+04
+#17480
+14
+#17520
+04
+#17560
+14
+b11000000010000000100000100000000100000011000000100000010000000100100000010000000000000100000001011000000000000000100001000 %
+b11000000010000000100000100000000100000011000000100000010000000100100000010000000000000100000001011000000000000000100001000 [
+b11000000010000000100000100000000100000011000000100000010000000100100000010000000000000100000001011000000000000000100001000 g
+#17600
+04
+#17640
+14
+#17680
+04
+#17720
+14
+#17760
+04
+#17800
+14
+#17840
+04
+#17880
+14
+#17920
+04
+#17960
+14
+#18000
+04
+#18040
+14
+#18080
+04
+#18120
+14
+#18160
+04
+#18200
+14
+#18240
+04
+#18280
+14
+#18320
+04
+#18360
+14
+b11000000010000000100000100000000100000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 %
+b11000000010000000100000100000000100000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 [
+b11000000010000000100000100000000100000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 g
+#18400
+04
+#18440
+14
+#18480
+04
+#18520
+14
+#18560
+04
+#18600
+14
+#18640
+04
+#18680
+14
+#18720
+04
+#18760
+14
+b11000000010000000100000100000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 %
+b11000000010000000100000100000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 [
+b11000000010000000100000100000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 g
+#18800
+04
+#18840
+14
+#18880
+04
+#18920
+14
+#18960
+04
+#19000
+14
+#19040
+04
+#19080
+14
+#19120
+04
+#19160
+14
+b11000000010000000100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 %
+b11000000010000000100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 [
+b11000000010000000100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 g
+#19200
+04
+#19240
+14
+#19280
+04
+#19320
+14
+#19360
+04
+#19400
+14
+#19440
+04
+#19480
+14
+#19520
+04
+#19560
+14
+b11000000010000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 %
+b11000000010000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 [
+b11000000010000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 g
+#19600
+04
+#19640
+14
+#19680
+04
+#19720
+14
+#19760
+04
+#19800
+14
+#19840
+04
+#19880
+14
+#19920
+04
+#19960
+14
+b11000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 %
+b11000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 [
+b11000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 g
+#20000
+04
+#20040
+14
+#20080
+04
+#20120
+14
+#20160
+04
+#20200
+14
+#20240
+04
+#20280
+14
+#20320
+04
+#20360
+b0 c
+b1 b
+14
+0f
+0&
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 %
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 [
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 g
+#20370
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 w"
+bx '
+bx a
+bx e
+0$
+#20380
+b0 b
+xT
+b0 ]
+1V
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001000 U
+#20389
+b0 w
+b0 R"
+b11 v
+b11 T"
+b100 q
+b100 P"
+b0 J"
+b11 |
+b11 3"
+b100 {
+b100 I"
+b1000000000000000011 #
+b1000000000000000011 Y
+b1000000000000000011 i
+1T
+1W
+#20390
+b1 w
+b1 R"
+b0 v
+b0 T"
+b0 q
+b0 P"
+b1000 |
+b1000 3"
+b0 {
+b0 I"
+b1011000000000000000100001000 #
+b1011000000000000000100001000 Y
+b1011000000000000000100001000 i
+b1011000000000000000100001000 `
+#20399
+x2
+b1000 z
+b1000 5"
+b1000 6"
+b1000 >"
+b1000 A"
+b1000 D"
+b1000 F"
+1/
+0%"
+0("
+1'"
+b0 ~
+b0 7"
+b1011 #"
+#20400
+b100100 m
+b100100 ,"
+x*"
+0"
+04
+#20409
+0p
+b1000 u
+b1000 /"
+b1000 O"
+b1000 3
+b1000 >
+b1000 h
+b1000 }
+b1000 ."
+b1000 ="
+b0 l
+b0 4"
+b0 Z"
+b0x000 :"
+b0x000 B"
+bx1xxx 8"
+bx1xxx G"
+b1000 9"
+b1000 E"
+b0 s
+b0 S"
+b0 V"
+b0 X"
+#20410
+b1010111 .
+b1010111 =
+b1010111 k
+b1010111 t
+b1010111 <"
+b1010111 @"
+b1010111 C"
+b1010111 H"
+b1010111 Q"
+b100100 r
+b100100 0"
+b100100 K"
+#20419
+b100000 m
+b100000 ,"
+1*"
+12
+b1 F
+08
+b0 :
+b10 <
+b0 9
+b0 n
+b0 W"
+b0 Y"
+#20420
+b1011111 8"
+b1011111 G"
+b0 :"
+b0 B"
+#20429
+07
+#20430
+b1011111 ;"
+b1011111 ?"
+#20440
+1O
+1,
+b10 -
+b10 D
+b10 M
+1+
+b1 F
+1H
+b1010111 I
+b1000 G
+b1 J
+14
+#20480
+04
+#20520
+14
+#20560
+04
+#20600
+14
+#20640
+04
+#20680
+14
+#20720
+04
+#20760
+14
+#20800
+04
+#20840
+14
+#20880
+04
+#20920
+14
+bx00000000 *
+bx00000000 ;
+bx00000000 P
+#20960
+04
+#21000
+14
+#21040
+04
+#21080
+14
+#21120
+04
+#21160
+14
+#21200
+04
+#21240
+14
+#21280
+04
+#21320
+14
+bx0000000000000000 *
+bx0000000000000000 ;
+bx0000000000000000 P
+#21360
+04
+#21400
+14
+#21440
+04
+#21480
+14
+#21520
+04
+#21560
+14
+#21600
+04
+#21640
+14
+#21680
+04
+#21720
+14
+bx000000000000000000000000 *
+bx000000000000000000000000 ;
+bx000000000000000000000000 P
+#21760
+04
+#21800
+14
+#21840
+04
+#21880
+14
+#21920
+04
+#21960
+14
+#22000
+04
+#22040
+14
+#22080
+04
+#22120
+b100100 m
+b100100 ,"
+x*"
+x2
+x8
+bx -
+bx D
+bx M
+0+
+0H
+b1010111 o"
+b0 J
+b0 F
+14
+0O
+0,
+b0 *
+b0 ;
+b0 P
+#22129
+b1010111 0
+b1010111 C
+b1010111 j
+b1010111 -"
+0*"
+0/
+0B
+02
+18
+1K
+#22130
+1*"
+b1 Z
+1"
+b100100 S
+17
+b100100 !
+b100100 $"
+b100100 )"
+b100100 M"
+#22140
+b0 w
+b0 R"
+b10 q
+b10 P"
+b10 {
+b10 I"
+b1001000000100000000000001000 #
+b1001000000100000000000001000 Y
+b1001000000100000000000001000 i
+b101000 y
+b101000 +"
+b101000 2"
+b1001000000100000000000001000 `
+b101000 x
+b101000 1"
+b101000 L"
+b101000 N"
+#22150
+b1010111 u
+b1010111 /"
+b1010111 O"
+1&"
+11
+1%"
+b1001 #"
+#22160
+b101000 m
+b101000 ,"
+0*"
+0"
+b0 .
+b0 =
+b0 k
+b0 t
+b0 <"
+b0 @"
+b0 C"
+b0 H"
+b0 Q"
+b110000 r
+b110000 0"
+b110000 K"
+04
+#22170
+b1000 8"
+b1000 G"
+#22180
+b1000 ;"
+b1000 ?"
+#22200
+14
+#22210
+1*"
+b10 Z
+1"
+b101000 S
+b1010111 ]"
+b101000 !
+b101000 $"
+b101000 )"
+b101000 M"
+#22220
+b100 w
+b100 R"
+b0 q
+b0 P"
+b0 {
+b0 I"
+b1011000000000000010000001000 #
+b1011000000000000010000001000 Y
+b1011000000000000010000001000 i
+b101100 y
+b101100 +"
+b101100 2"
+b1011000000000000010000001000 `
+b101100 x
+b101100 1"
+b101100 L"
+b101100 N"
+#22230
+1B
+1/
+01
+0%"
+b1011 #"
+#22240
+b101100 m
+b101100 ,"
+0*"
+0"
+b11 .
+b11 =
+b11 k
+b11 t
+b11 <"
+b11 @"
+b11 C"
+b11 H"
+b11 Q"
+b101100 r
+b101100 0"
+b101100 K"
+04
+#22250
+b1011 8"
+b1011 G"
+#22260
+b1011 ;"
+b1011 ?"
+#22280
+b11 u
+b11 /"
+b11 O"
+b11 0
+b11 C
+b11 j
+b11 -"
+0B
+b11 o"
+14
+#22290
+1*"
+b11 Z
+1"
+b101100 S
+b101100 !
+b101100 $"
+b101100 )"
+b101100 M"
+#22300
+b101 w
+b101 R"
+b101000 z
+b101000 5"
+b101000 6"
+b101000 >"
+b101000 A"
+b101000 D"
+b101000 F"
+b101000 |
+b101000 3"
+b1011000000000000010100101000 #
+b1011000000000000010100101000 Y
+b1011000000000000010100101000 i
+b110000 y
+b110000 +"
+b110000 2"
+b1011000000000000010100101000 `
+b110000 x
+b110000 1"
+b110000 L"
+b110000 N"
+#22310
+b101000 3
+b101000 >
+b101000 h
+b101000 }
+b101000 ."
+b101000 ="
+b101011 8"
+b101011 G"
+b101000 9"
+b101000 E"
+#22320
+b110000 m
+b110000 ,"
+0*"
+0"
+b1 9
+b10 .
+b10 =
+b10 k
+b10 t
+b10 <"
+b10 @"
+b10 C"
+b10 H"
+b10 Q"
+b101011 ;"
+b101011 ?"
+b110000 r
+b110000 0"
+b110000 K"
+04
+#22329
+b101100 m
+b101100 ,"
+1*"
+bx u
+bx /"
+bx O"
+12
+b10 F
+bx 0
+bx C
+bx j
+bx -"
+08
+0K
+#22330
+b101010 8"
+b101010 G"
+#22340
+b101010 ;"
+b101010 ?"
+#22360
+1Q
+1,
+b11 (
+b11 E
+b11 N
+b10 -
+b10 D
+b10 M
+1)
+b10 F
+1H
+b10 I
+b101000 G
+b10 J
+14
+#22400
+04
+#22440
+14
+#22480
+04
+#22520
+14
+#22560
+04
+#22600
+14
+#22640
+04
+#22680
+14
+#22720
+04
+#22760
+14
+#22800
+04
+#22840
+14
+b11 k"
+#22880
+04
+#22920
+14
+#22960
+04
+#23000
+14
+#23040
+04
+#23080
+14
+#23120
+04
+#23160
+14
+#23200
+04
+#23240
+14
+b0 l"
+#23280
+04
+#23320
+14
+#23360
+04
+#23400
+14
+#23440
+04
+#23480
+14
+#23520
+04
+#23560
+14
+#23600
+04
+#23640
+14
+#23680
+04
+#23720
+14
+#23760
+04
+#23800
+14
+#23840
+04
+#23880
+14
+#23920
+04
+#23960
+14
+#24000
+04
+#24040
+1O
+bx (
+bx E
+bx N
+b1010 -
+b1010 D
+b1010 M
+0)
+1+
+b1 J
+b1 F
+14
+0Q
+1,
+#24050
+07
+#24080
+04
+#24120
+14
+#24160
+04
+#24200
+14
+#24240
+04
+#24280
+14
+#24320
+04
+#24360
+14
+#24400
+04
+#24440
+14
+#24480
+04
+#24520
+14
+#24560
+04
+#24600
+14
+#24640
+04
+#24680
+14
+#24720
+04
+#24760
+14
+#24800
+04
+#24840
+14
+#24880
+04
+#24920
+14
+#24960
+04
+#25000
+14
+#25040
+04
+#25080
+14
+#25120
+04
+#25160
+14
+#25200
+04
+#25240
+14
+#25280
+04
+#25320
+14
+#25360
+04
+#25400
+14
+#25440
+04
+#25480
+14
+#25520
+04
+#25560
+14
+#25600
+04
+#25640
+14
+#25680
+04
+#25720
+bx -
+bx D
+bx M
+0+
+0H
+b10 o"
+b0 J
+b1 F
+14
+0O
+0,
+#25729
+b10 u
+b10 /"
+b10 O"
+b110000 m
+b110000 ,"
+b10 0
+b10 C
+b10 j
+b10 -"
+0*"
+0/
+0B
+02
+b0 F
+18
+1K
+#25730
+1*"
+b0 Z
+b11 \
+1"
+b110000 S
+17
+b110000 !
+b110000 $"
+b110000 )"
+b110000 M"
+#25740
+bx w
+bx R"
+bx z
+bx 5"
+bx 6"
+bx >"
+bx A"
+bx D"
+bx F"
+bx v
+bx T"
+bx q
+bx P"
+bx J"
+bx |
+bx 3"
+bx {
+bx I"
+b1 b
+bx #
+bx Y
+bx i
+0T
+b110100 y
+b110100 +"
+b110100 2"
+b1011000000000000000100001000 `
+bx U
+b0x ]
+0V
+b110100 x
+b110100 1"
+b110100 L"
+b110100 N"
+#25749
+xW
+#25750
+xp
+bx 3
+bx >
+bx h
+bx }
+bx ."
+bx ="
+b0x0 :"
+b0x0 B"
+bx1x 8"
+bx1x G"
+bx 9"
+bx E"
+bx #"
+#25760
+bx u
+bx /"
+bx O"
+bx 0
+bx C
+bx j
+bx -"
+x8
+bx l
+bx 4"
+bx Z"
+bx :
+bx <
+bx 9
+bx .
+bx =
+bx k
+bx t
+bx <"
+bx @"
+bx C"
+bx H"
+bx Q"
+bx ;"
+bx ?"
+bx s
+bx S"
+bx V"
+bx X"
+bx r
+bx 0"
+bx K"
+04
+#25769
+xK
+#25770
+bx 8"
+bx G"
+bx :"
+bx B"
+bx n
+bx W"
+bx Y"
+x7
+#25800
+1f
+1&
+b11 '
+b11 a
+b11 e
+1$
+b1 b
+b1 c
+14
+#25840
+04
+#25880
+14
+#25920
+04
+#25960
+14
+#26000
+04
+#26040
+14
+#26080
+04
+#26120
+14
+#26160
+04
+#26200
+14
+#26240
+04
+#26280
+14
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001010 %
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001010 [
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000100001010 g
+#26320
+04
+#26360
+14
+#26400
+04
+#26440
+14
+#26480
+04
+#26520
+14
+#26560
+04
+#26600
+14
+#26640
+04
+#26680
+14
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000000001010 %
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000000001010 [
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000001011000000000000000000001010 g
+#26720
+04
+#26760
+14
+#26800
+04
+#26840
+14
+#26880
+04
+#26920
+14
+#26960
+04
+#27000
+14
+#27040
+04
+#27080
+14
+#27120
+04
+#27160
+14
+#27200
+04
+#27240
+14
+#27280
+04
+#27320
+14
+#27360
+04
+#27400
+14
+#27440
+04
+#27480
+14
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000000000000000000000000000001010 %
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000000000000000000000000000001010 [
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000100000000000000000000000000000001010 g
+#27520
+04
+#27560
+14
+#27600
+04
+#27640
+14
+#27680
+04
+#27720
+14
+#27760
+04
+#27800
+14
+#27840
+04
+#27880
+14
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000010000000000000000000000000000001010 %
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000010000000000000000000000000000001010 [
+b1011000000000000010100101000000010110000000000000100000010000000100100000010000000000000010000000000000000000000000000001010 g
+#27920
+04
+#27960
+14
+#28000
+04
+#28040
+14
+#28080
+04
+#28120
+14
+#28160
+04
+#28200
+14
+#28240
+04
+#28280
+14
+#28320
+04
+#28360
+14
+#28400
+04
+#28440
+14
+#28480
+04
+#28520
+14
+#28560
+04
+#28600
+14
+#28640
+04
+#28680
+14
+b1011000000000000010100101000000010110000000000000100000010000000100100000000000000000000010000000000000000000000000000001010 %
+b1011000000000000010100101000000010110000000000000100000010000000100100000000000000000000010000000000000000000000000000001010 [
+b1011000000000000010100101000000010110000000000000100000010000000100100000000000000000000010000000000000000000000000000001010 g
+#28720
+04
+#28760
+14
+#28800
+04
+#28840
+14
+#28880
+04
+#28920
+14
+#28960
+04
+#29000
+14
+#29040
+04
+#29080
+14
+#29120
+04
+#29160
+14
+#29200
+04
+#29240
+14
+#29280
+04
+#29320
+14
+#29360
+04
+#29400
+14
+#29440
+04
+#29480
+14
+b1011000000000000010100101000000010110000000000000100xxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 %
+b1011000000000000010100101000000010110000000000000100xxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 [
+b1011000000000000010100101000000010110000000000000100xxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 g
+#29520
+04
+#29560
+14
+#29600
+04
+#29640
+14
+#29680
+04
+#29720
+14
+#29760
+04
+#29800
+14
+#29840
+04
+#29880
+14
+b10110000000000000101001010000000101100000000xxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 %
+b10110000000000000101001010000000101100000000xxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 [
+b10110000000000000101001010000000101100000000xxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 g
+#29920
+04
+#29960
+14
+#30000
+04
+#30040
+14
+#30080
+04
+#30120
+14
+#30160
+04
+#30200
+14
+#30240
+04
+#30280
+14
+b101100000000000001010010100000001011xxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 %
+b101100000000000001010010100000001011xxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 [
+b101100000000000001010010100000001011xxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 g
+#30320
+04
+#30360
+14
+#30400
+04
+#30440
+14
+#30480
+04
+#30520
+14
+#30560
+04
+#30600
+14
+#30640
+04
+#30680
+14
+b1011000000000000010100101000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 %
+b1011000000000000010100101000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 [
+b1011000000000000010100101000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 g
+#30720
+04
+#30760
+14
+#30800
+04
+#30840
+14
+#30880
+04
+#30920
+14
+#30960
+04
+#31000
+14
+#31040
+04
+#31080
+14
+b10110000000000000101xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 %
+b10110000000000000101xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 [
+b10110000000000000101xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 g
+#31120
+04
+#31160
+14
+#31200
+04
+#31240
+14
+#31280
+04
+#31320
+14
+#31360
+04
+#31400
+14
+#31440
+04
+#31480
+14
+b101100000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 %
+b101100000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 [
+b101100000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 g
+#31520
+04
+#31560
+14
+#31600
+04
+#31640
+14
+#31680
+04
+#31720
+14
+#31760
+04
+#31800
+14
+#31840
+04
+#31880
+14
+b1011xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 %
+b1011xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 [
+b1011xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0000100100000000000000000000010000000000000000000000000000001010 g
+#31920
+04
+#31960
+14
+#32000
+04
+#32040
+14
+#32080
+04
+#32120
+14
+#32160
+04
+#32200
+14
+#32240
+04
+#32280
+b0 c
+b1 b
+14
+0f
+0&
+bx0000100100000000000000000000010000000000000000000000000000001010 %
+bx0000100100000000000000000000010000000000000000000000000000001010 [
+bx0000100100000000000000000000010000000000000000000000000000001010 g
+#32290
+bx0000100100000000000000000000010000000000000000000000000000001010 x"
+bx '
+bx a
+bx e
+0$
+#32300
+b0 b
+xT
+b0 ]
+1V
+bx0000100100000000000000000000010000000000000000000000000000001010 U
+#32309
+b1 w
+b1 R"
+b1000 z
+b1000 5"
+b1000 6"
+b1000 >"
+b1000 A"
+b1000 D"
+b1000 F"
+b0 v
+b0 T"
+b0 q
+b0 P"
+b0 J"
+b1000 |
+b1000 3"
+b0 {
+b0 I"
+b1011000000000000000100001000 #
+b1011000000000000000100001000 Y
+b1011000000000000000100001000 i
+1T
+1W
+#32310
+b0 w
+b0 R"
+b1010 z
+b1010 5"
+b1010 6"
+b1010 >"
+b1010 A"
+b1010 D"
+b1010 F"
+b10 v
+b10 T"
+b1010 |
+b1010 3"
+b1010 #
+b1010 Y
+b1010 i
+b1010 `
+#32319
+0&"
+1%"
+b0 #"
+#32320
+0p
+b110100 m
+b110100 ,"
+b1010 u
+b1010 /"
+b1010 O"
+0*"
+b1010 3
+b1010 >
+b1010 h
+b1010 }
+b1010 ."
+b1010 ="
+0"
+b0x0x0 :"
+b0x0x0 B"
+bx1x1x 8"
+bx1x1x G"
+b1010 9"
+b1010 E"
+04
+#32329
+b110100 r
+b110100 0"
+b110100 K"
+#32330
+b1010111 l
+b1010111 4"
+b1010111 Z"
+b10 :
+b10 <
+b0 9
+b0 .
+b0 =
+b0 k
+b0 t
+b0 <"
+b0 @"
+b0 C"
+b0 H"
+b0 Q"
+b1010111 s
+b1010111 S"
+b1010111 V"
+b1010111 X"
+#32339
+08
+0K
+#32340
+b1010 8"
+b1010 G"
+b0 :"
+b0 B"
+b10101001 n
+b10101001 W"
+b10101001 Y"
+17
+#32350
+b1010 ;"
+b1010 ?"
+#32360
+14
+#32370
+1*"
+b1 Z
+1"
+b110100 S
+b1010 ["
+b110100 !
+b110100 $"
+b110100 )"
+b110100 M"
+#32380
+b100 z
+b100 5"
+b100 6"
+b100 >"
+b100 A"
+b100 D"
+b100 F"
+b100 v
+b100 T"
+b100 |
+b100 3"
+b1001000000000000000000000100 #
+b1001000000000000000000000100 Y
+b1001000000000000000000000100 i
+b111000 y
+b111000 +"
+b111000 2"
+b1001000000000000000000000100 `
+b111000 x
+b111000 1"
+b111000 L"
+b111000 N"
+#32390
+b100 3
+b100 >
+b100 h
+b100 }
+b100 ."
+b100 ="
+bx u
+bx /"
+bx O"
+12
+b10 F
+b100 8"
+b100 G"
+b100 9"
+b100 E"
+1&"
+11
+b1001 #"
+b1010 .
+b1010 =
+b1010 k
+b1010 t
+b1010 <"
+b1010 @"
+b1010 C"
+b1010 H"
+b1010 Q"
+#32400
+b11 l
+b11 4"
+b11 Z"
+0"
+b0 :
+b1 <
+b1110 8"
+b1110 G"
+b11 s
+b11 S"
+b11 V"
+b11 X"
+b111000 r
+b111000 0"
+b111000 K"
+04
+#32409
+xK
+#32410
+b1 F
+b11111101 n
+b11111101 W"
+b11111101 Y"
+07
+b1110 ;"
+b1110 ?"
+#32440
+1O
+1,
+b1 -
+b1 D
+b1 M
+1+
+b1 F
+b1 J
+14
+#32450
+bx ["
+#32470
+bx .
+bx =
+bx k
+bx t
+bx <"
+bx @"
+bx C"
+bx H"
+bx Q"
+#32480
+bx1xx 8"
+bx1xx G"
+b0x00 :"
+b0x00 B"
+04
+#32490
+bx ;"
+bx ?"
+#32520
+14
+#32530
+bx ["
+#32560
+04
+#32600
+14
+#32610
+bx ["
+#32640
+04
+#32680
+14
+#32690
+bx ["
+#32720
+04
+#32760
+14
+#32770
+bx ["
+#32800
+04
+#32840
+14
+#32850
+bx ["
+#32880
+04
+#32920
+14
+#32930
+bx ["
+#32960
+04
+#33000
+14
+#33010
+bx ["
+#33040
+04
+#33080
+14
+#33090
+bx ["
+#33120
+04
+#33160
+14
+#33170
+bx ["
+#33200
+04
+#33240
+14
+#33250
+bx ["
+#33280
+04
+#33320
+14
+#33330
+bx ["
+#33360
+04
+#33400
+14
+#33410
+bx ["
+#33440
+04
+#33480
+14
+#33490
+bx ["
+#33520
+04
+#33560
+14
+#33570
+bx ["
+#33600
+04
+#33640
+14
+#33650
+bx ["
+#33680
+04
+#33720
+14
+#33730
+bx ["
+#33760
+04
+#33800
+14
+#33810
+bx ["
+#33840
+04
+#33880
+14
+#33890
+bx ["
+#33920
+04
+#33960
+14
+#33970
+bx ["
+#34000
+04
+#34040
+14
+#34050
+bx ["
+#34080
+04
+#34120
+b111000 m
+b111000 ,"
+x*"
+x2
+x8
+bx -
+bx D
+bx M
+0+
+b0 n"
+b0 J
+b0 F
+14
+0O
+0,
+#34129
+b0 u
+b0 /"
+b0 O"
+b0 0
+b0 C
+b0 j
+b0 -"
+0*"
+01
+02
+18
+1K
+#34130
+1*"
+b10 Z
+1"
+b111000 S
+b0 ["
+b111000 !
+b111000 $"
+b111000 )"
+b111000 M"
+#34140
+bx w
+bx R"
+bx z
+bx 5"
+bx 6"
+bx >"
+bx A"
+bx D"
+bx F"
+bx v
+bx T"
+bx q
+bx P"
+bx J"
+bx |
+bx 3"
+bx {
+bx I"
+bx #
+bx Y
+bx i
+b111100 y
+b111100 +"
+b111100 2"
+bx `
+b111100 x
+b111100 1"
+b111100 L"
+b111100 N"
+#34150
+xp
+bx 3
+bx >
+bx h
+bx }
+bx ."
+bx ="
+bx :"
+bx B"
+bx 8"
+bx G"
+bx 9"
+bx E"
+bx #"
+#34160
+bx u
+bx /"
+bx O"
+b111100 m
+b111100 ,"
+bx 0
+bx C
+bx j
+bx -"
+0*"
+x8
+bx l
+bx 4"
+bx Z"
+0"
+bx :
+bx <
+bx 9
+bx s
+bx S"
+bx V"
+bx X"
+bx r
+bx 0"
+bx K"
+04
+#34169
+xK
+#34170
+bx n
+bx W"
+bx Y"
+x7
+#34200
+14
+#34210
+1*"
+b11 Z
+1"
+b111100 S
+b111100 !
+b111100 $"
+b111100 )"
+b111100 M"
+#34220
+b1000000 y
+b1000000 +"
+b1000000 2"
+b1000000 x
+b1000000 1"
+b1000000 L"
+b1000000 N"
+#34240
+b1000000 m
+b1000000 ,"
+0*"
+0"
+04
+#34280
+14
+#34290
+1*"
+b0 Z
+b100 \
+1"
+b1000000 S
+b1000000 !
+b1000000 $"
+b1000000 )"
+b1000000 M"
+#34300
+b1 b
+0T
+b1000100 y
+b1000100 +"
+b1000100 2"
+b1010 `
+bx U
+b0x ]
+0V
+b1000100 x
+b1000100 1"
+b1000100 L"
+b1000100 N"
+#34309
+xW
+#34320
+04
+#34360
+1f
+1&
+b100 '
+b100 a
+b100 e
+1$
+b1 b
+b1 c
+14
+#34400
+04
+#34440
+14
+#34480
+04
+#34520
+14
+#34560
+04
+#34600
+14
+#34640
+04
+#34680
+14
+#34720
+04
+#34760
+14
+#34800
+04
+#34840
+14
+bx00001001000000000000000000000100000000000000000000000000xxxxxxxx %
+bx00001001000000000000000000000100000000000000000000000000xxxxxxxx [
+bx00001001000000000000000000000100000000000000000000000000xxxxxxxx g
+#34880
+04
+#34920
+14
+#34960
+04
+#35000
+14
+#35040
+04
+#35080
+14
+#35120
+04
+#35160
+14
+#35200
+04
+#35240
+14
+bx000010010000000000000000000001000000000000000000xxxxxxxxxxxxxxxx %
+bx000010010000000000000000000001000000000000000000xxxxxxxxxxxxxxxx [
+bx000010010000000000000000000001000000000000000000xxxxxxxxxxxxxxxx g
+#35280
+04
+#35320
+14
+#35360
+04
+#35400
+14
+#35440
+04
+#35480
+14
+#35520
+04
+#35560
+14
+#35600
+04
+#35640
+14
+bx0000100100000000000000000000010000000000xxxxxxxxxxxxxxxxxxxxxxxx %
+bx0000100100000000000000000000010000000000xxxxxxxxxxxxxxxxxxxxxxxx [
+bx0000100100000000000000000000010000000000xxxxxxxxxxxxxxxxxxxxxxxx g
+#35680
+04
+#35720
+14
+#35760
+04
+#35800
+14
+#35840
+04
+#35880
+14
+#35920
+04
+#35960
+14
+#36000
+04
+#36040
+14
+bx00001001000000000000000000000100xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %
+bx00001001000000000000000000000100xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx [
+bx00001001000000000000000000000100xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx g
+#36080
+04
+#36120
+14
+#36160
+04
+#36200
+14
+#36240
+04
+#36280
+14
+#36320
+04
+#36360
+14
+#36400
+04
+#36440
+14
+bx000010010000000000000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %
+bx000010010000000000000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx [
+bx000010010000000000000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx g
+#36480
+04
+#36520
+14
+#36560
+04
+#36600
+14
+#36640
+04
+#36680
+14
+#36720
+04
+#36760
+14
+#36800
+04
+#36840
+14
+bx0000100100000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %
+bx0000100100000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx [
+bx0000100100000000xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx g
+#36880
+04
+#36920
+14
+#36960
+04
+#37000
+14
+#37040
+04
+#37080
+14
+#37120
+04
+#37160
+14
+#37200
+04
+#37240
+14
+bx00001001xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx %
+bx00001001xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx [
+bx00001001xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx g
+#37280
+04
+#37320
+14
+#37360
+04
+#37400
+14
+#37440
+04
+#37480
+14
+#37520
+04
+#37560
+14
+#37600
+04
+#37640
+14
+bx %
+bx [
+bx g
+#37680
+04
+#37720
+14
+#37760
+04
+#37800
+14
+#37840
+04
+#37880
+14
+#37920
+04
+#37960
+14
+#38000
+04
+#38040
+14
+#38080
+04
+#38120
+14
+#38160
+04
+#38200
+14
+#38240
+04
+#38280
+14
+#38320
+04
+#38360
+14
+#38400
+04
+#38440
+14
+#38480
+04
+#38520
+14
+#38560
+04
+#38600
+14
+#38640
+04
+#38680
+14
+#38720
+04
+#38760
+14
+#38800
+04
+#38840
+14
+#38880
+04
+#38920
+14
+#38960
+04
+#39000
+14
+#39040
+04
+#39080
+14
+#39120
+04
+#39160
+14
+#39200
+04
+#39240
+14
+#39280
+04
+#39320
+14
+#39360
+04
+#39400
+14
+#39440
+04
+#39480
+14
+#39520
+04
+#39560
+14
+#39600
+04
+#39640
+14
+#39680
+04
+#39720
+14
+#39760
+04
+#39800
+14
+#39840
+04
+#39880
+14
+#39920
+04
+#39960
+14
+#40000
+04
+#40040
+14
+#40080
+04
+#40120
+14
+#40160
+04
+#40200
+14
+#40240
+04
+#40280
+14
+#40320
+04
+#40360
+14
+#40400
+04
+#40440
+14
+#40480
+04
+#40520
+14
+#40560
+04
+#40600
+14
+#40640
+04
+#40680
+14
+#40720
+04
+#40760
+14
+#40800
+04
+#40840
+b0 c
+b1 b
+14
+0f
+0&
+#40850
+bx y"
+bx '
+bx a
+bx e
+0$
+#40860
+b0 ]
+#40869
+1W
+#40880
+04
+#40920
+1f
+1&
+b100 '
+b100 a
+b100 e
+1$
+b1 b
+b1 c
+14
+#40960
+04
+#41000
+14
+#41040
+04
+#41080
+14
+#41120
+04
+#41160
+14
+#41200
+04
+#41240
+14
+#41280
+04
+#41320
+14
+#41360
+04
+#41400
+14
+#41440
+04
+#41480
+14
+#41520
+04
+#41560
+14
+#41600
+04
+#41640
+14
+#41680
+04
+#41720
+14
+#41760
+04
+#41800
+14
+#41840
+04
+#41880
+14
+#41920
+04
+#41960
+14
+#42000
+04
+#42040
+14
+#42080
+04
+#42120
+14
+#42160
+04
+#42200
+14
+#42240
+04
+#42280
+14
+#42320
+04
+#42360
+14
+#42400
+04
+#42440
+14
+#42480
+04
+#42520
+14
+#42560
+04
+#42600
+14
+#42640
+04
+#42680
+14
+#42720
+04
+#42760
+14
+#42800
+04
+#42840
+14
+#42880
+04
+#42920
+14
+#42960
+04
+#43000
+14
+#43040
+04
+#43080
+14
+#43120
+04
+#43160
+14
+#43200
+04
+#43240
+14
+#43280
+04
+#43320
+14
+#43360
+04
+#43400
+14
+#43440
+04
+#43480
+14
+#43520
+04
+#43560
+14
+#43600
+04
+#43640
+14
+#43680
+04
+#43720
+14
+#43760
+04
+#43800
+14
+#43840
+04
+#43880
+14
+#43920
+04
+#43960
+14
+#44000
+04
+#44040
+14
+#44080
+04
+#44120
+14
+#44160
+04
+#44200
+14
+#44240
+04
+#44280
+14
+#44320
+04
+#44360
+14
+#44400
+04
+#44440
+14
+#44480
+04
+#44520
+14
+#44560
+04
+#44600
+14
+#44640
+04
+#44680
+14
+#44720
+04
+#44760
+14
+#44800
+04
+#44840
+14
+#44880
+04
+#44920
+14
+#44960
+04
+#45000
+14
+#45040
+04
+#45080
+14
+#45120
+04
+#45160
+14
+#45200
+04
+#45240
+14
+#45280
+04
+#45320
+14
+#45360
+04
+#45400
+14
+#45440
+04
+#45480
+14
+#45520
+04
+#45560
+14
+#45600
+04
+#45640
+14
+#45680
+04
+#45720
+14
+#45760
+04
+#45800
+14
+#45840
+04
+#45880
+14
+#45920
+04
+#45960
+14
+#46000
+04
+#46040
+14
+#46080
+04
+#46120
+14
+#46160
+04
+#46200
+14
+#46240
+04
+#46280
+14
+#46320
+04
+#46360
+14
+#46400
+04
+#46440
+14
+#46480
+04
+#46520
+14
+#46560
+04
+#46600
+14
+#46640
+04
+#46680
+14
+#46720
+04
+#46760
+14
+#46800
+04
+#46840
+14
+#46880
+04
+#46920
+14
+#46960
+04
+#47000
+14
+#47040
+04
+#47080
+14
+#47120
+04
+#47160
+14
+#47200
+04
+#47240
+14
+#47280
+04
+#47320
+14
+#47360
+04
+#47400
+b0 c
+b1 b
+14
+0f
+0&
+#47410
+bx y"
+bx '
+bx a
+bx e
+0$
+#47440
+04
+#47480
+1f
+1&
+b100 '
+b100 a
+b100 e
+1$
+b1 b
+b1 c
+14
+#47520
+04
+#47560
+14
+#47600
+04
+#47640
+14
+#47680
+04
+#47720
+14
+#47760
+04
+#47800
+14
+#47840
+04
+#47880
+14
+#47920
+04
+#47960
+14
+#48000
+04
+#48040
+14
+#48080
+04
+#48120
+14
+#48160
+04
+#48200
+14
+#48240
+04
+#48280
+14
+#48320
+04
+#48360
+14
+#48400
+04
+#48440
+14
+#48480
+04
+#48520
+14
+#48560
+04
+#48600
+14
+#48640
+04
+#48680
+14
+#48720
+04
+#48760
+14
+#48800
+04
+#48840
+14
+#48880
+04
+#48920
+14
+#48960
+04
+#49000
+14
+#49040
+04
+#49080
+14
+#49120
+04
+#49160
+14
+#49200
+04
+#49240
+14
+#49280
+04
+#49320
+14
+#49360
+04
+#49400
+14
+#49440
+04
+#49480
+14
+#49520
+04
+#49560
+14
+#49600
+04
+#49640
+14
+#49680
+04
+#49720
+14
+#49760
+04
+#49800
+14
+#49840
+04
+#49880
+14
+#49920
+04
+#49960
+14
+#50000
+04
+#50040
+14
+#50050
